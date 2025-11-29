@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scapula Anatomy Quiz 3: Vascular Supply</title>
+    <style>
+        :root {
+            --primary: #2c5282;
+            --secondary: #3182ce;
+            --accent: #63b3ed;
+            --light: #ebf8ff;
+            --dark: #1a365d;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(44, 82, 130, 0.85), rgba(44, 82, 130, 0.9)), 
+                        url('https://i.ibb.co/VW0XLwfG/t9duylpwvxf61.jpg') center/cover fixed;
+            color: #2d3748;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .questions-section {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .answer-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .answer-section.visible {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-number::before {
+            content: "Q";
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            background: white;
+        }
+        
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background-color: #e6fffa;
+            border-color: var(--secondary);
+            box-shadow: 0 4px 8px rgba(49, 130, 206, 0.1);
+        }
+        
+        .option.correct {
+            background-color: #f0fff4;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: #fff5f5;
+            border-color: var(--danger);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            flex: 2;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reset-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            flex: 1;
+        }
+        
+        .reset-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+        
+        .results-section {
+            margin-top: 40px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .score-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 25px 15px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .passed .stat-value {
+            color: var(--success);
+        }
+        
+        .failed .stat-value {
+            color: var(--danger);
+        }
+        
+        .attempted .stat-value {
+            color: var(--secondary);
+        }
+        
+        .answer-bank {
+            margin-top: 40px;
+        }
+        
+        .answer-item {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .answer-correct {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .answer-incorrect {
+            color: var(--danger);
+        }
+        
+        .clinical-note {
+            background: #fffaf0;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        
+        .anatomy-highlight {
+            background: #e6fffa;
+            border-left: 4px solid var(--success);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .support-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .support-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .support-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .share-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn-small {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-twitter {
+            background-color: #1DA1F2;
+            color: white;
+        }
+        
+        .share-facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+        
+        .share-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .share-copy {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 1200px) {
+            .quiz-container {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn-small {
+                width: 250px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .score-value {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scapula Anatomy Quiz 3: Vascular Supply</h1>
+            <p class="subtitle">40 Advanced Questions on Scapular Blood Vessels & Muscle Perfusion</p>
+            <div class="difficulty-badge">EXPERT LEVEL</div>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-value">40</div>
+                <div class="info-label">Vascular Questions</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Scapular Vessels</div>
+                <div class="info-label">Focus Area</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Muscle Perfusion</div>
+                <div class="info-label">Key Focus</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="questions-section" id="questions-section">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <div class="answer-section" id="answer-section">
+                <h2>Answer Bank</h2>
+                <p>Check your answers after completing the quiz</p>
+                <div id="answer-bank">
+                    <!-- Answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="reset-btn" id="reset-btn">Reset Quiz</button>
+            <button class="submit-btn" id="submit-btn">Submit Answers</button>
+        </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="score-display">
+                <h2>Your Score</h2>
+                <div class="score-value" id="score-value">0/40</div>
+                <p>Scapula Anatomy Quiz 3: Vascular Supply</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box attempted">
+                    <div class="stat-value" id="attempted-value">0</div>
+                    <div class="stat-label">Questions Attempted</div>
+                </div>
+                <div class="stat-box passed">
+                    <div class="stat-value" id="passed-value">0</div>
+                    <div class="stat-label">Questions Passed</div>
+                </div>
+                <div class="stat-box failed">
+                    <div class="stat-value" id="failed-value">0</div>
+                    <div class="stat-label">Questions Failed</div>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <h3>Share Your Results</h3>
+                <div class="share-buttons">
+                    <button class="share-btn-small share-twitter" id="share-twitter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                        Twitter
+                    </button>
+                    <button class="share-btn-small share-facebook" id="share-facebook">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                        Facebook
+                    </button>
+                    <button class="share-btn-small share-whatsapp" id="share-whatsapp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.017 2.047c-2.724 0-5.443 1.042-7.513 3.112-4.163 4.163-4.163 10.92 0 15.083 2.07 2.07 4.789 3.112 7.513 3.112s5.443-1.042 7.513-3.112c4.163-4.163 4.163-10.92 0-15.083-2.07-2.07-4.789-3.112-7.513-3.112zm-3.017 15.953l-1.516-1.516 3.035-3.035-3.035-3.035 1.516-1.516 3.035 3.035 3.035-3.035 1.516 1.516-3.035 3.035 3.035 3.035-1.516 1.516-3.035-3.035-3.035 3.035z"/>
+                        </svg>
+                        WhatsApp
+                    </button>
+                    <button class="share-btn-small share-copy" id="share-copy">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 1h-12c-1.1 0-2 .9-2 2v14h2v-14h12v-2zm3 4h-11c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm0 16h-11v-14h11v14z"/>
+                        </svg>
+                        Copy Results
+                    </button>
+                </div>
+            </div>
+            
+            <div class="answer-bank">
+                <h3>Detailed Answers with Clinical Correlations</h3>
+                <div id="detailed-answers">
+                    <!-- Detailed answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="support-section">
+            <h3>Follow Code God to support more medical quizzes</h3>
+            <a href="https://www.tiktok.com/@code.god3?_r=1&_d=ZS-91SF7FxgGKu" target="_blank" class="support-link">Follow on TikTok</a>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions and answers for Scapular Vascular Supply
+        const quizData = [
+            {
+                question: "Which artery is the primary blood supply to the supraspinatus muscle?",
+                options: [
+                    "Suprascapular artery",
+                    "Dorsal scapular artery", 
+                    "Circumflex scapular artery",
+                    "Thoracoacromial artery"
+                ],
+                correct: 0,
+                explanation: "The suprascapular artery, a branch of the thyrocervical trunk, is the primary blood supply to the supraspinatus muscle. It passes through the suprascapular notch to reach the supraspinous fossa."
+            },
+            {
+                question: "Which vessel forms the main component of the scapular anastomosis?",
+                options: [
+                    "Suprascapular artery",
+                    "Dorsal scapular artery", 
+                    "Circumflex scapular artery",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The scapular anastomosis involves three main arteries: suprascapular (from thyrocervical trunk), dorsal scapular (from transverse cervical or directly from subclavian), and circumflex scapular (from subscapular artery)."
+            },
+            {
+                question: "Which artery passes through the triangular space to reach the infraspinous fossa?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "Thoracodorsal artery"
+                ],
+                correct: 1,
+                explanation: "The circumflex scapular artery, a branch of the subscapular artery, passes through the triangular space (bordered by teres major, teres minor, and long head of triceps) to supply the infraspinous fossa."
+            },
+            {
+                question: "What is the primary blood supply to the subscapularis muscle?",
+                options: [
+                    "Suprascapular artery",
+                    "Subscapular artery and its branches", 
+                    "Circumflex scapular artery",
+                    "Thoracodorsal artery"
+                ],
+                correct: 1,
+                explanation: "The subscapularis muscle receives its primary blood supply from the subscapular artery and its branches, particularly the circumflex scapular artery which provides extensive collateral circulation."
+            },
+            {
+                question: "Which vessel runs with the dorsal scapular nerve along the medial scapular border?",
+                options: [
+                    "Suprascapular artery",
+                    "Dorsal scapular artery", 
+                    "Circumflex scapular artery",
+                    "Transverse cervical artery"
+                ],
+                correct: 1,
+                explanation: "The dorsal scapular artery (when present as a separate vessel) runs with the dorsal scapular nerve along the medial border of the scapula, supplying the rhomboid muscles and contributing to the scapular anastomosis."
+            },
+            {
+                question: "What is the clinical significance of the scapular anastomosis?",
+                options: [
+                    "No clinical significance",
+                    "Provides collateral circulation if subclavian artery is blocked", 
+                    "Prevents shoulder dislocations",
+                    "Supplies only superficial muscles"
+                ],
+                correct: 1,
+                explanation: "The scapular anastomosis provides crucial collateral circulation around the scapula. If the subclavian or axillary artery is blocked, blood can reach the arm via connections between thyrocervical trunk and subscapular artery."
+            },
+            {
+                question: "Which artery supplies the teres major muscle?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Thoracodorsal artery",
+                    "Subscapular artery branches"
+                ],
+                correct: 1,
+                explanation: "The teres major muscle is primarily supplied by the circumflex scapular artery, with additional contributions from the thoracodorsal artery and posterior circumflex humeral artery."
+            },
+            {
+                question: "What vessel passes through the quadrangular space with the axillary nerve?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "Anterior circumflex humeral artery"
+                ],
+                correct: 2,
+                explanation: "The posterior circumflex humeral artery passes through the quadrangular space with the axillary nerve. This space is bordered by teres major, teres minor, long head of triceps, and surgical neck of humerus."
+            },
+            {
+                question: "Which artery is endangered during surgical approaches to the posterior scapula?",
+                options: [
+                    "Suprascapular artery in suprascapular notch",
+                    "Circumflex scapular artery in triangular space", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Both the suprascapular artery in the suprascapular notch and the circumflex scapular artery in the triangular space are at risk during posterior scapular approaches. Careful dissection is required to preserve these vessels."
+            },
+            {
+                question: "What is the origin of the thoracodorsal artery?",
+                options: [
+                    "Axillary artery directly",
+                    "Subscapular artery", 
+                    "Suprascapular artery",
+                    "Thyrocervical trunk"
+                ],
+                correct: 1,
+                explanation: "The thoracodorsal artery arises from the subscapular artery, which itself is the largest branch of the axillary artery. The thoracodorsal artery supplies the latissimus dorsi muscle."
+            },
+            {
+                question: "Which vessel supplies the serratus anterior muscle?",
+                options: [
+                    "Lateral thoracic artery",
+                    "Thoracodorsal artery", 
+                    "Circumflex scapular artery",
+                    "Suprascapular artery"
+                ],
+                correct: 0,
+                explanation: "The lateral thoracic artery, branching from the axillary artery, is the primary blood supply to the serratus anterior muscle. It runs along the lateral thoracic wall with the long thoracic nerve."
+            },
+            {
+                question: "What is the 'triangular space' bounded by?",
+                options: [
+                    "Teres major, teres minor, long head of triceps",
+                    "Teres minor, surgical neck of humerus, long head of triceps", 
+                    "Teres major, surgical neck of humerus, long head of triceps",
+                    "Teres major, teres minor, surgical neck of humerus"
+                ],
+                correct: 0,
+                explanation: "The triangular space is bounded by teres major superiorly, teres minor inferiorly, and long head of triceps laterally. It transmits the circumflex scapular artery to the infraspinous fossa."
+            },
+            {
+                question: "Which artery anastomoses with the suprascapular artery in the infraspinous fossa?",
+                options: [
+                    "Dorsal scapular artery",
+                    "Circumflex scapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "Thoracodorsal artery"
+                ],
+                correct: 1,
+                explanation: "The circumflex scapular artery anastomoses with the suprascapular artery in the infraspinous fossa, creating an important collateral pathway around the scapular spine."
+            },
+            {
+                question: "What is the primary venous drainage of the scapular muscles?",
+                options: [
+                    "Suprascapular vein to subclavian vein",
+                    "Circumflex scapular vein to axillary vein", 
+                    "Both A and B via scapular venous plexus",
+                    "Direct drainage to brachial vein"
+                ],
+                correct: 2,
+                explanation: "The scapular muscles drain via both the suprascapular vein (to subclavian) and circumflex scapular vein (to axillary), forming an extensive scapular venous plexus that parallels the arterial anastomosis."
+            },
+            {
+                question: "Which vessel is most likely injured in fractures of the scapular neck?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "Subscapular artery"
+                ],
+                correct: 1,
+                explanation: "The circumflex scapular artery is particularly vulnerable in scapular neck fractures due to its course through the triangular space near the lateral scapular border."
+            },
+            {
+                question: "What artery supplies the trapezius muscle?",
+                options: [
+                    "Transverse cervical artery",
+                    "Suprascapular artery", 
+                    "Dorsal scapular artery",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The trapezius muscle receives blood supply from multiple sources: transverse cervical artery (primary), suprascapular artery, dorsal scapular artery, and occipital artery branches."
+            },
+            {
+                question: "Which clinical condition can result from compression of the suprascapular artery?",
+                options: [
+                    "Suprascapular nerve entrapment syndrome",
+                    "Thoracic outlet syndrome", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Compression of the suprascapular artery in the suprascapular notch can cause both vascular insufficiency and contribute to suprascapular nerve entrapment, as they travel together through the notch."
+            },
+            {
+                question: "What is the origin of the subscapular artery?",
+                options: [
+                    "First part of axillary artery",
+                    "Second part of axillary artery", 
+                    "Third part of axillary artery",
+                    "Thyrocervical trunk"
+                ],
+                correct: 2,
+                explanation: "The subscapular artery arises from the third part of the axillary artery. It's the largest branch of the axillary artery and gives off the circumflex scapular and thoracodorsal arteries."
+            },
+            {
+                question: "Which vessel provides the dominant blood supply to the rotator cuff muscles?",
+                options: [
+                    "Suprascapular artery for supraspinatus and infraspinatus",
+                    "Subscapular artery for subscapularis", 
+                    "Posterior circumflex humeral for teres minor",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The rotator cuff muscles receive blood from multiple sources: suprascapular artery (supraspinatus, infraspinatus), subscapular artery branches (subscapularis), and posterior circumflex humeral artery (teres minor)."
+            },
+            {
+                question: "What is the 'watershed area' of the rotator cuff?",
+                options: [
+                    "Supraspinatus insertion",
+                    "Critical zone 1cm medial to supraspinatus insertion", 
+                    "Infraspinatus origin",
+                    "Subscapularis insertion"
+                ],
+                correct: 1,
+                explanation: "The 'critical zone' or watershed area is located approximately 1cm medial to the supraspinatus insertion. This area has relatively poor vascularity, making it susceptible to degenerative tears."
+            },
+            {
+                question: "Which artery can be used as a landmark during latissimus dorsi flap harvest?",
+                options: [
+                    "Suprascapular artery",
+                    "Thoracodorsal artery", 
+                    "Circumflex scapular artery",
+                    "Lateral thoracic artery"
+                ],
+                correct: 1,
+                explanation: "The thoracodorsal artery is the primary pedicle for the latissimus dorsi muscle flap. Its consistent anatomy makes it a reliable landmark during reconstructive surgery procedures."
+            },
+            {
+                question: "What vascular structure is at risk during arthroscopic Bankart repair?",
+                options: [
+                    "Suprascapular artery",
+                    "Axillary artery", 
+                    "Posterior circumflex humeral artery",
+                    "Circumflex scapular artery"
+                ],
+                correct: 2,
+                explanation: "The posterior circumflex humeral artery is at risk during arthroscopic Bankart repair, particularly when placing anchors in the posteroinferior glenoid rim. Injury can cause significant bleeding."
+            },
+            {
+                question: "Which vessel supplies the coracoid process region?",
+                options: [
+                    "Thoracoacromial artery",
+                    "Suprascapular artery", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "The coracoid process region receives blood supply from both the thoracoacromial artery (acromial branch) and suprascapular artery, providing rich vascularization for surgical procedures involving the coracoid."
+            },
+            {
+                question: "What is the clinical significance of the 'angiosome' concept in scapular region?",
+                options: [
+                    "No clinical significance",
+                    "Guides flap design in reconstructive surgery", 
+                    "Predicts nerve injury patterns",
+                    "Determines muscle strength"
+                ],
+                correct: 1,
+                explanation: "The angiosome concept, describing composite blocks of tissue supplied by specific source arteries, guides the design of scapular and parascapular flaps in reconstructive surgery based on vascular territories."
+            },
+            {
+                question: "Which artery is primarily responsible for supplying the glenoid labrum?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "All contribute via periarticular plexus"
+                ],
+                correct: 3,
+                explanation: "The glenoid labrum receives blood supply from multiple arteries via a periarticular vascular plexus formed by branches of suprascapular, circumflex scapular, and posterior circumflex humeral arteries."
+            },
+            {
+                question: "What vascular complication can occur after scapular fracture?",
+                options: [
+                    "Pseudoaneurysm formation",
+                    "Arteriovenous fistula", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Both pseudoaneurysms and arteriovenous fistulas can occur after scapular fractures, particularly involving the circumflex scapular or suprascapular arteries due to their proximity to fracture lines."
+            },
+            {
+                question: "Which vessel provides the main blood supply to the scapular spine?",
+                options: [
+                    "Suprascapular artery",
+                    "Deep branch of transverse cervical artery", 
+                    "Circumflex scapular artery",
+                    "Thoracoacromial artery"
+                ],
+                correct: 1,
+                explanation: "The deep branch of the transverse cervical artery (also called dorsal scapular artery in some classifications) provides the main blood supply to the scapular spine and surrounding musculature."
+            },
+            {
+                question: "What is the 'rete articulare'?",
+                options: [
+                    "Nerve network around shoulder",
+                    "Venous plexus around scapula", 
+                    "Arterial network around glenohumeral joint",
+                    "Lymphatic drainage system"
+                ],
+                correct: 2,
+                explanation: "The 'rete articulare' is an arterial network around the glenohumeral joint formed by anastomoses between anterior and posterior circumflex humeral, thoracoacromial, and suprascapular arteries."
+            },
+            {
+                question: "Which surgical approach risks injury to the circumflex scapular artery?",
+                options: [
+                    "Judet approach to posterior scapula",
+                    "Deltopectoral approach", 
+                    "Superior approach to shoulder",
+                    "All of the above"
+                ],
+                correct: 0,
+                explanation: "The Judet approach to the posterior scapula specifically risks injury to the circumflex scapular artery as it requires dissection through the triangular space where this vessel courses."
+            },
+            {
+                question: "What is the primary blood supply to the acromion process?",
+                options: [
+                    "Acromial branch of thoracoacromial artery",
+                    "Suprascapular artery", 
+                    "Posterior circumflex humeral artery",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The acromion process receives blood supply from multiple sources: acromial branch of thoracoacromial artery, suprascapular artery, and posterior circumflex humeral artery, creating a rich vascular network."
+            },
+            {
+                question: "Which vessel is commonly used in microvascular scapular flap transfers?",
+                options: [
+                    "Suprascapular artery and vein",
+                    "Circumflex scapular artery and vein", 
+                    "Thoracodorsal artery and vein",
+                    "Transverse cervical artery and vein"
+                ],
+                correct: 1,
+                explanation: "The circumflex scapular artery and its venae comitantes are commonly used as the vascular pedicle for scapular and parascapular free flaps due to their consistent anatomy and adequate vessel diameter."
+            },
+            {
+                question: "What is the 'subacromial arterial plexus'?",
+                options: [
+                    "Network supplying rotator cuff tendons",
+                    "Vessels in subacromial bursa", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "The subacromial arterial plexus is a vascular network in the subacromial bursa that supplies the rotator cuff tendons, particularly important for tendon healing and surgical repair outcomes."
+            },
+            {
+                question: "Which artery provides the main blood supply to the teres minor muscle?",
+                options: [
+                    "Posterior circumflex humeral artery",
+                    "Circumflex scapular artery", 
+                    "Suprascapular artery",
+                    "All contribute significantly"
+                ],
+                correct: 3,
+                explanation: "The teres minor muscle receives significant blood supply from multiple arteries: posterior circumflex humeral (primary), circumflex scapular, and suprascapular arteries via collateral connections."
+            },
+            {
+                question: "What vascular structure is at risk during Latarjet procedure?",
+                options: [
+                    "Axillary artery",
+                    "Suprascapular artery", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Both the axillary artery (during coracoid osteotomy) and suprascapular artery (during glenoid exposure) are at risk during the Latarjet procedure for anterior shoulder instability."
+            },
+            {
+                question: "Which vessel supplies the inferior angle of the scapula?",
+                options: [
+                    "Dorsal scapular artery",
+                    "Circumflex scapular artery", 
+                    "Thoracodorsal artery",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The inferior angle of the scapula receives blood supply from the dorsal scapular artery, circumflex scapular artery, and thoracodorsal artery via their terminal branches and anastomotic connections."
+            },
+            {
+                question: "What is the 'critical shoulder angle' in vascular terms?",
+                options: [
+                    "Angle between vessels",
+                    "No vascular significance", 
+                    "Area of watershed vascularity",
+                    "Site of common vascular injury"
+                ],
+                correct: 1,
+                explanation: "The critical shoulder angle is a radiographic measurement between glenoid and acromion with biomechanical significance for rotator cuff pathology, but it has no specific vascular correlation or definition."
+            },
+            {
+                question: "Which artery is primarily responsible for supplying the scapular body periosteum?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Multiple arteries via periosteal network",
+                    "Dorsal scapular artery"
+                ],
+                correct: 2,
+                explanation: "The scapular body periosteum receives blood supply from multiple arteries via a rich periosteal network, including branches from suprascapular, circumflex scapular, and dorsal scapular arteries."
+            },
+            {
+                question: "What vascular pattern is characteristic of the rotator cuff 'critical zone'?",
+                options: [
+                    "Rich vascular network",
+                    "Avascular area", 
+                    "Watershed area between suprascapular and circumflex scapular arteries",
+                    "Direct arterial supply only"
+                ],
+                correct: 2,
+                explanation: "The rotator cuff 'critical zone' represents a watershed area between the terminal branches of the suprascapular artery and circumflex scapular artery, creating relative hypovascularity that predisposes to degeneration."
+            },
+            {
+                question: "Which vessel is most important for scapular fracture healing?",
+                options: [
+                    "Suprascapular artery",
+                    "Circumflex scapular artery", 
+                    "Periosteal blood supply from multiple sources",
+                    "Dorsal scapular artery"
+                ],
+                correct: 2,
+                explanation: "Scapular fracture healing relies primarily on the rich periosteal blood supply from multiple arterial sources, rather than any single dominant vessel, explaining the generally good healing potential of scapular fractures."
+            },
+            {
+                question: "What is the clinical significance of the 'scapular arterial circle'?",
+                options: [
+                    "No clinical significance",
+                    "Provides collateral flow in vascular insufficiency", 
+                    "Predicts surgical outcomes",
+                    "Determines muscle strength"
+                ],
+                correct: 1,
+                explanation: "The scapular arterial circle, formed by anastomoses around the scapular border, provides crucial collateral circulation that can maintain blood flow to the upper extremity even with proximal arterial occlusion."
+            },
+            {
+                question: "Which surgical procedure specifically preserves the circumflex scapular artery?",
+                options: [
+                    "Total scapulectomy",
+                    "Partial scapulectomy with vascular preservation", 
+                    "Rotator cuff repair",
+                    "Shoulder arthroplasty"
+                ],
+                correct: 1,
+                explanation: "Partial scapulectomy procedures for tumor resection often specifically preserve the circumflex scapular artery to maintain vascularity to the remaining scapular fragment and surrounding muscles."
+            }
+        ];
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionsSection = document.getElementById('questions-section');
+            const answerSection = document.getElementById('answer-section');
+            const answerBank = document.getElementById('answer-bank');
+            const submitBtn = document.getElementById('submit-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const resultsSection = document.getElementById('results-section');
+            const scoreValue = document.getElementById('score-value');
+            const attemptedValue = document.getElementById('attempted-value');
+            const passedValue = document.getElementById('passed-value');
+            const failedValue = document.getElementById('failed-value');
+            const detailedAnswers = document.getElementById('detailed-answers');
+            const shareTwitterBtn = document.getElementById('share-twitter');
+            const shareFacebookBtn = document.getElementById('share-facebook');
+            const shareWhatsappBtn = document.getElementById('share-whatsapp');
+            const shareCopyBtn = document.getElementById('share-copy');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let userAnswers = Array(quizData.length).fill(null);
+            
+            // Create question elements
+            quizData.forEach((questionData, index) => {
+                // Create question element for questions section
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${questionData.question}</div>
+                    <div class="options">
+                        ${questionData.options.map((option, optionIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optionIndex}">
+                                ${String.fromCharCode(65 + optionIndex)}. ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsSection.appendChild(questionElement);
+                
+                // Create answer element for answer bank
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-item';
+                answerElement.innerHTML = `
+                    <strong>${index + 1}. ${questionData.question}</strong><br>
+                    <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span>
+                `;
+                answerBank.appendChild(answerElement);
+            });
+            
+            // Update progress bar
+            function updateProgress() {
+                const answered = userAnswers.filter(answer => answer !== null).length;
+                const progress = (answered / quizData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    // Remove selected class from all options in this question
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${questionIndex}"]`);
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store user's answer
+                    userAnswers[questionIndex] = optionIndex;
+                    
+                    // Update progress
+                    updateProgress();
+                });
+            });
+            
+            // Submit button event listener
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                let attempted = 0;
+                let passed = 0;
+                let failed = 0;
+                
+                // Clear previous detailed answers
+                detailedAnswers.innerHTML = '';
+                
+                // Evaluate answers
+                quizData.forEach((questionData, index) => {
+                    const userAnswer = userAnswers[index];
+                    const correctAnswer = questionData.correct;
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${index}"]`);
+                    
+                    if (userAnswer !== null) {
+                        attempted++;
+                        
+                        // Mark correct/incorrect answers
+                        questionOptions.forEach((option, optionIndex) => {
+                            if (optionIndex === correctAnswer) {
+                                option.classList.add('correct');
+                            } else if (optionIndex === userAnswer && userAnswer !== correctAnswer) {
+                                option.classList.add('incorrect');
+                            }
+                        });
+                        
+                        if (userAnswer === correctAnswer) {
+                            score++;
+                            passed++;
+                        } else {
+                            failed++;
+                        }
+                        
+                        // Create detailed answer element
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        const userAnswerClass = userAnswer === correctAnswer ? 'answer-correct' : 'answer-incorrect';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="${userAnswerClass}">Your answer: ${userAnswer !== null ? String.fromCharCode(65 + userAnswer) + '. ' + questionData.options[userAnswer] : 'Not attempted'}</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    } else {
+                        // Create detailed answer for unattempted question
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="answer-incorrect">Your answer: Not attempted</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    }
+                });
+                
+                // Update score and stats
+                scoreValue.textContent = `${score}/${quizData.length}`;
+                attemptedValue.textContent = attempted;
+                passedValue.textContent = passed;
+                failedValue.textContent = failed;
+                
+                // Show results section and answer section
+                resultsSection.style.display = 'block';
+                answerSection.classList.add('visible');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset button event listener
+            resetBtn.addEventListener('click', function() {
+                userAnswers = Array(quizData.length).fill(null);
+                
+                // Clear all selections
+                document.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Hide results section and answer section
+                resultsSection.style.display = 'none';
+                answerSection.classList.remove('visible');
+                
+                // Reset progress bar
+                progressBar.style.width = '0%';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Share buttons functionality
+            shareTwitterBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Scapular Vascular Supply Quiz! Test your knowledge too.`;
+                const url = window.location.href;
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareFacebookBtn.addEventListener('click', function() {
+                const url = window.location.href;
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareWhatsappBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Scapular Vascular Supply Quiz! Test your knowledge too: ${window.location.href}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            });
+            
+            shareCopyBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const attempted = document.getElementById('attempted-value').textContent;
+                const passed = document.getElementById('passed-value').textContent;
+                const text = `Scapular Vascular Supply Quiz Results:
+Score: ${score}
+Questions Attempted: ${attempted}
+Questions Passed: ${passed}
+Test your knowledge: ${window.location.href}`;
+                
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('Results copied to clipboard!');
+                }, function() {
+                    alert('Failed to copy results. Please try again.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
